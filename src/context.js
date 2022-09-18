@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState, useContext } from 'react'
+import { useState, useContext, createContext } from 'react'
 
 const table = {
   sports: 21,
@@ -9,13 +9,9 @@ const table = {
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?'
 
-const url = ''
-const tempUrl =
-  'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple'
+const AppContext = createContext()
 
-const AppContext = React.createContext()
-
-const AppProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const [waiting, setWaiting] = useState(true)
   const [loading, setLoading] = useState(false)
   const [questions, setQuestions] = useState([])
@@ -113,9 +109,5 @@ const AppProvider = ({ children }) => {
     </AppContext.Provider>
   )
 }
-// make sure use
-export const useGlobalContext = () => {
-  return useContext(AppContext)
-}
 
-export { AppContext, AppProvider }
+export const useGlobalContext = () => useContext(AppContext)
