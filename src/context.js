@@ -9,7 +9,7 @@ const table = {
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?'
 
-const AppContext = createContext()
+const AppContext = createContext(null)
 
 export const AppProvider = ({ children }) => {
   const [waiting, setWaiting] = useState(true)
@@ -26,22 +26,21 @@ export const AppProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const fetchQuestions = async (url) => {
-    setLoading(true)
-    setWaiting(false)
-    const response = await axios(url).catch((err) => console.log(err))
-    if (response) {
+    try {
+      setLoading(true)
+      setWaiting(false)
+
+      const response = await axios(url)
       const data = response.data.results
-      if (data.length > 0) {
-        setQuestions(data)
-        setLoading(false)
-        setWaiting(false)
-        setError(false)
-      } else {
-        setWaiting(true)
-        setError(true)
-      }
-    } else {
+
+      setQuestions(data)
+      setLoading(false)
+      setWaiting(false)
+      setError(false)
+    } catch (error) {
+      setError(true)
       setWaiting(true)
+      console.log(error)
     }
   }
 
