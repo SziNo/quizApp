@@ -35,7 +35,6 @@ export const AppProvider = ({ children }) => {
 
       setQuestions(data)
       setLoading(false)
-      setWaiting(false)
       setError(false)
     } catch (error) {
       setError(true)

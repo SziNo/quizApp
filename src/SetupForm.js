@@ -7,7 +7,7 @@ const SetupForm = () => {
   return (
     <main>
       <section className='quiz quiz-small'>
-        <form className='setup-form'>
+        <form className='setup-form' onSubmit={handleSubmit}>
           {}
           <div className='form-control'>
             <label htmlFor='amount'>number of questions</label>
@@ -57,7 +57,7 @@ const SetupForm = () => {
               can't generate questions, please try different options
             </p>
           )}
-          <button type='submit' onClick={handleSubmit} className='submit-btn'>
+          <button type='submit' className='submit-btn'>
             start
           </button>
         </form>
